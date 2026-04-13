@@ -1,0 +1,324 @@
+/* ============================================================
+   extra.css — Website Availability Monitor Docs
+   Custom styles for Zensical documentation site
+   File location: docs/stylesheets/extra.css
+   ============================================================ */
+
+
+/* ─────────────────────────────────────────────────────────────
+   1. GOOGLE FONTS IMPORT
+   Loads Inter (body) and JetBrains Mono (code) explicitly.
+   Zensical loads fonts from config but this ensures they're
+   available for our custom rules below too.
+   ───────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+
+/* ─────────────────────────────────────────────────────────────
+   2. BRAND COLOR OVERRIDES
+   Zensical uses CSS variables for its color system.
+   We override the primary "light-blue" hue to a custom shade
+   that matches our DevOps/SRE branding — #0288d1 (Material
+   Light Blue 700) for stronger contrast and visual identity.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --md-primary-fg-color:        #0288d1;  /* header + sidebar background */
+  --md-primary-fg-color--light: #4fc3f7;  /* lighter shade — icon highlights */
+  --md-primary-fg-color--dark:  #01579b;  /* darker shade — hover states */
+  --md-accent-fg-color:         #1565c0;  /* accent: links, active items */
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   3. TYPOGRAPHY
+   Fine-tune font rendering and line height for docs readability.
+   ───────────────────────────────────────────────────────────── */
+
+/* Body text — Inter */
+body,
+.md-typeset {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* All headings — Inter with stronger weight */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* H1 — page title */
+.md-typeset h1 {
+  font-size: 2rem;
+  color: #0288d1;
+  border-bottom: 2px solid #e3f2fd;
+  padding-bottom: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+/* H2 — section headings */
+.md-typeset h2 {
+  font-size: 1.4rem;
+  color: #01579b;
+  margin-top: 2.5rem;
+}
+
+/* H3 — sub-section headings */
+.md-typeset h3 {
+  font-size: 1.1rem;
+  color: #0277bd;
+}
+
+/* Code blocks and inline code — JetBrains Mono */
+.md-typeset code,
+.md-typeset pre,
+.md-typeset kbd {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85em;
+  font-feature-settings: "liga" 1, "calt" 1; /* enable ligatures: -> => != */
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   4. CODE BLOCKS
+   Rounded corners, subtle border, better background color.
+   ───────────────────────────────────────────────────────────── */
+.md-typeset pre {
+  border-radius: 8px;
+  border: 1px solid rgba(2, 136, 209, 0.15);
+}
+
+/* Inline code pill styling */
+.md-typeset code:not(pre > code) {
+  background-color: #e3f2fd;
+  color: #01579b;
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-weight: 500;
+}
+
+/* Dark mode inline code */
+[data-md-color-scheme="slate"] .md-typeset code:not(pre > code) {
+  background-color: rgba(79, 195, 247, 0.12);
+  color: #4fc3f7;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   5. NAVIGATION SIDEBAR
+   Slightly wider sidebar + tighter item spacing.
+   ───────────────────────────────────────────────────────────── */
+.md-sidebar {
+  width: 14rem;
+}
+
+/* Active nav item highlight */
+.md-nav__link--active {
+  font-weight: 600;
+  color: #0288d1 !important;
+}
+
+/* Nav item hover */
+.md-nav__link:hover {
+  color: #01579b;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   6. TABLES
+   Cleaner striped table with light-blue header.
+   ───────────────────────────────────────────────────────────── */
+.md-typeset table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  font-size: 0.85rem;
+}
+
+/* Table header row */
+.md-typeset table thead tr {
+  background-color: #0288d1;
+  color: #ffffff;
+}
+
+.md-typeset table thead th {
+  font-weight: 600;
+  padding: 0.65rem 1rem;
+}
+
+/* Alternating row colors */
+.md-typeset table tbody tr:nth-child(even) {
+  background-color: #f0f8ff;
+}
+
+.md-typeset table tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+/* Dark mode table */
+[data-md-color-scheme="slate"] .md-typeset table thead tr {
+  background-color: #01579b;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table tbody tr:nth-child(even) {
+  background-color: rgba(2, 136, 209, 0.07);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   7. ADMONITIONS (Note / Warning / Tip boxes)
+   Custom colors per type, rounded corners.
+   ───────────────────────────────────────────────────────────── */
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 8px;
+  border-left-width: 4px;
+  font-size: 0.875rem;
+}
+
+/* "note" box — light blue */
+.md-typeset .admonition.note,
+.md-typeset details.note {
+  border-left-color: #0288d1;
+  background-color: #e3f2fd;
+}
+
+/* "tip" box — green */
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+  border-left-color: #2e7d32;
+  background-color: #e8f5e9;
+}
+
+/* "warning" box — amber */
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+  border-left-color: #f57f17;
+  background-color: #fff8e1;
+}
+
+/* "danger" box — red */
+.md-typeset .admonition.danger,
+.md-typeset details.danger {
+  border-left-color: #c62828;
+  background-color: #ffebee;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   8. HEADER
+   Slightly taller header with a bottom shadow for depth.
+   ───────────────────────────────────────────────────────────── */
+.md-header {
+  box-shadow: 0 2px 8px rgba(1, 87, 155, 0.25);
+}
+
+/* Site title in header */
+.md-header__title {
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   9. FOOTER
+   Subtle top border to visually separate from content.
+   ───────────────────────────────────────────────────────────── */
+.md-footer {
+  border-top: 1px solid rgba(2, 136, 209, 0.2);
+}
+
+.md-footer-meta {
+  background-color: #01579b;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   10. SEARCH BAR
+   Rounded search input in header.
+   ───────────────────────────────────────────────────────────── */
+.md-search__form {
+  border-radius: 24px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   11. LINKS
+   Custom underline effect on hover.
+   ───────────────────────────────────────────────────────────── */
+.md-typeset a {
+  color: #0288d1;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.md-typeset a:hover {
+  color: #01579b;
+  border-bottom-color: #0288d1;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   12. BACK TO TOP BUTTON
+   Matches brand color.
+   ───────────────────────────────────────────────────────────── */
+.md-top {
+  background-color: #0288d1;
+  color: #ffffff;
+  border-radius: 24px;
+}
+
+.md-top:hover {
+  background-color: #01579b;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   13. BLOCKQUOTES
+   Used for "Core DevOps philosophy" callouts in your docs.
+   ───────────────────────────────────────────────────────────── */
+.md-typeset blockquote {
+  border-left: 4px solid #0288d1;
+  background-color: #e3f2fd;
+  border-radius: 0 8px 8px 0;
+  padding: 0.75rem 1.25rem;
+  color: #01579b;
+  font-style: italic;
+}
+
+[data-md-color-scheme="slate"] .md-typeset blockquote {
+  background-color: rgba(2, 136, 209, 0.1);
+  color: #4fc3f7;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   14. COPY BUTTON ON CODE BLOCKS
+   Make the copy button visible on hover.
+   ───────────────────────────────────────────────────────────── */
+.md-code__content .md-clipboard {
+  color: #4fc3f7;
+}
+
+.md-code__content .md-clipboard:hover {
+  color: #ffffff;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   15. RESPONSIVE — MOBILE TWEAKS
+   Tighten spacing on small screens.
+   ───────────────────────────────────────────────────────────── */
+@media screen and (max-width: 768px) {
+  .md-typeset h1 { font-size: 1.6rem; }
+  .md-typeset h2 { font-size: 1.2rem; }
+  .md-typeset    { font-size: 0.875rem; }
+}
