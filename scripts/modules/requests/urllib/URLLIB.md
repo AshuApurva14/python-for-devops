@@ -44,7 +44,7 @@ It also has two parts
 **dir():** It is a built-in function which doesn't need to be imported. It is used to list the attributes of an object. It returns all the list of attributes and methods associated with objecct you pass to it.
 
 ---
-### Inspect All the Headers of the HTTPResponse object
+### Inspect All the Headers of the `HTTPResponse` object
 
 - Access the headers using the .headers attribute of the HTTPResponse object.
 - An HTTPMessage object can be treated like as dictionary by calling `.items()` on it to get all the headers as tuples.
@@ -59,6 +59,20 @@ It also has two parts
 
 ---
 
-### Close HTTPResponse Objects
+### Close `HTTPResponse` Objects
 
-The HTTPResponse object has a lot in common with the file object. The HTTPResponse class inherits from the IOBase class, as do file objects, which means that you have to be mindful of opening and closing.
+- The HTTPResponse object has a lot in common with the file object. 
+- The HTTPResponse class inherits from the IOBase class, as do file objects, which means that you have to be mindful of opening and closing.
+- It is important to close HTTPResponse objects in complex projects to avoid alow execution and bugs.
+- I/O streams are limited, so not closing streams can interfere with other programs or operating systems.
+- Use a context manager or call `.close()` on response objects to close `HTTPResponse` objects.
+
+---
+
+### Go from Bytes to Strings
+
+- When using `urllib.request.urlopen()`, the body of the response is a bytes object.
+- To convert bytes object to string, you need to decode the bytes by finding out the character encoding used.
+- Character encoding is often referred to as character set.
+- 90% of the web pages today are encoded in UTF-8.
+
