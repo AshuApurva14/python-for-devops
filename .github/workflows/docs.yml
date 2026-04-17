@@ -1,0 +1,57 @@
+name: Documentation
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "docs"
+      - "projects/project_101/real_demo_01/website_monitor/zensical.toml"
+      - ".github/workflows/docs.yml"
+  workflow_dispatch:
+  
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - uses: actions/configure-pages@v5
+    
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install UV
+        run: |
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            echo "$HOME"/.cargo/bin" >>  $GITHUB_PATH
+         
+      - name: Install dependencies
+        run: |
+           uv sync --group docs
+
+      - name: Generate auto-content
+        run: |
+           sudo apt-get update && sudo apt-get install -y tree build-essential
+           
+      - run: zensical build --clean 
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+      - uses: actions/deploy-pages@v4
+        id: deployment
