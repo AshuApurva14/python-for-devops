@@ -21,7 +21,7 @@ jobs:
             - name: Setup Python
               uses: actions/setup-python@v6
               with:
-                python-version: 'pyproject.toml'
+                python-version: 'projects/website-monitor-system/pyproject.toml'
 
             - name: Install uv
               uses: astral-sh/setup-uv@v7
@@ -31,5 +31,5 @@ jobs:
 
             - name: Execute Script
               run: |
-                cd projects/website-monitor-system
-                python ./main.py
+                
+                python projects/website-monitor-system/main.py
