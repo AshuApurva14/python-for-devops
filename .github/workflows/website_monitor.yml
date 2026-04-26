@@ -28,7 +28,8 @@ jobs:
             
             - name: Install the project
               run: uv sync --project projects/website-monitor-system/pyproject.toml
+
             - name: Execute Script
               run: |
                 
-                uv run --project projects/website-monitor-system/main.py
+                uv run --script projects/website-monitor-system/main.py
