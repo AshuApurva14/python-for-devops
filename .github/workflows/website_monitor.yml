@@ -1,2 +1,30 @@
+name: Website Monitor System
+
+on:
+    workflow_dispatch:
+
+    # schedule:
+    #     - cron: '1 * * * *'
+        
+
+jobs:
+
+    website-monitor:
+        name: website-monitor
+        runs-on: 'ubuntu-latest'
+        steps:
+
+            - name: Checkout Repository
+              uses: actions/checkout@v6
+
+            
+            - name: Setup Python
+              uses: actions/setup-python@v6
+              with:
+                python-version: '3.13' 
 
 
+            - name: Execute Script
+              run: |
+                cd projects/website-monitor-system
+                python ./main.py

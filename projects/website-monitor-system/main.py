@@ -1,16 +1,9 @@
 import requests
-import time
 import logging
 import smtplib
 from email.mime.text import MIMEText
+from datetime import datetime
 from requests.exceptions import HTTPError
-
-# Email Configurations
-EMAIL_SENDER = "aapurva74@gmail.com"
-EMAIL_RECIEVER = "devopsdre5@gmail.com"
-EMAIL_PASSWORD = ""
-SMTP_SERVER = "smtp.gmail.com"
-SMTP_PORT = 465
 
 
 
@@ -40,12 +33,20 @@ def check_website_response(URL):
             send_alert_messgae("Website  unreachable aler", msg)
     
 def send_alert_messgae(subject, body):
-    msg = MIMEText(body)
-    msg['Subject'] = subject
-    msg['From'] = EMAIL_SENDER
-    msg['To'] = EMAIL_RECIEVER
+    
 
     try:
+        # Email Configurations
+        EMAIL_SENDER = "aapurva74@gmail.com"
+        EMAIL_RECIEVER = "devopsdre5@gmail.com"
+        EMAIL_PASSWORD = "Your password"
+        SMTP_SERVER = "smtp.gmail.com"
+        SMTP_PORT = 465
+
+        msg = MIMEText(body)
+        msg['Subject'] = f"Website Monitor Status:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+        msg['From'] = EMAIL_SENDER
+        msg['To'] = EMAIL_RECIEVER
 
         with smtplib.SMTP_SSL(SMTP_SERVER,SMTP_PORT) as server:
             server.login(EMAIL_SENDER, EMAIL_PASSWORD)
